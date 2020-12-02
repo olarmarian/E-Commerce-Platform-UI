@@ -1,0 +1,50 @@
+.ProductCard {
+  padding: 0;
+  width: 300px;
+  height: 450px;
+  background-color: #fff;
+  color: #1a1a1a;
+  text-align: center;
+
+  img {
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+
+  .ProductCard__content {
+    padding: 1em 1em 0 1em;
+
+    .ProductCard__content--title {
+      font-size: 20px;
+      word-break: break-all;
+      height: 3em;
+      overflow: hidden;
+    }
+
+    .ProductCard__content--category {
+      font-size: 14px;
+      color: #bababa;
+    }
+
+    .ProductCard__content--price {
+      color: red;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .ProductCard__content--in-stock {
+
+      font-size: 14px;
+      color: green;
+      font-weight: 700;
+    }
+
+    .ProductCard__content--out-of-stock {
+      font-size: 14px;
+      color: rebeccapurple;
+    }
+  }
+
+}

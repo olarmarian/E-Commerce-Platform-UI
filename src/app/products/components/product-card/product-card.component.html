@@ -1,0 +1,14 @@
+<mat-card class="ProductCard">
+  <img src={{product.image}} alt="product image" />
+  <mat-card-content class="ProductCard__content">
+    <h2 class="ProductCard__content--title">{{product.name}}</h2>
+    <p class="ProductCard__content--category">{{product.category}}</p>
+
+    <p *ngIf="product.quantity !== 0" class="ProductCard__content--in-stock">In stock</p>
+    <p *ngIf="product.quantity === 0" class="ProductCard__content--out-of-stock">Out of stock</p>
+    <p class="ProductCard__content--price">{{product.price | currency}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Add to cart</button>
+  </mat-card-actions>
+</mat-card>
