@@ -1,9 +1,17 @@
 .Footer {
-  height: 60px;
-  background-color: aqua;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+
   padding: 0 3em;
-  
+  height: 60px;
+
+  background-color: aqua;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
 }
