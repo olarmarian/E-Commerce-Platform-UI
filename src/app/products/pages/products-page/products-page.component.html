@@ -1,7 +1,18 @@
 <div class="Page">
 
-  <div class="ProductsGridLayout">
-    <app-product-card *ngFor="let product of products" [product]='product'></app-product-card>
+  <div class="Page__content">
+    <div class="ProductsFiltersContainer" *ngIf="!areFiltersLoading">
+
+      <label>Filter by product category:</label>
+      <app-checkbox-filter [values]="productFilters.categories"></app-checkbox-filter>
+      
+    </div>
+    <div class="ProductsFiltersContainer" *ngIf="areFiltersLoading">
+      <p>No filters loaded</p>
+    </div>
+    <div class="ProductsGridLayout">
+      <app-product-card *ngFor="let product of products" [product]='product'></app-product-card>
+    </div>
   </div>
 
 </div>

@@ -1,6 +1,17 @@
-.ProductsGridLayout {
+.Page__content {
+  width: 70%;
+  display: flex;
   margin-top: 1em;
-  width: 50%;
+}
+
+.ProductsFiltersContainer {
+  width: 25%;
+
+}
+
+.ProductsGridLayout {
+
+  width: 75%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1em;

@@ -1,0 +1,13 @@
+.Checkbox__container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  width: 20rem;
+  padding: 1em .5em;
+
+  background-color: #c2185b;
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+}

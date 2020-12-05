@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ProductFiltersModel } from './models/product-filters.model';
 import ProductModel from './models/product.model';
 
 @Injectable({
@@ -18,5 +19,9 @@ export class ProductsService {
 
   getProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(this.productsUrl, this.httpOptions);
+  }
+
+  getProductFilters(): Observable<ProductFiltersModel> {
+    return this.http.get<any>(`${this.productsUrl}/filters`, this.httpOptions);
   }
 }

@@ -1,0 +1,7 @@
+<div *ngIf="values.length !== 0" class="Checkbox__container">
+  <mat-checkbox color="accent" *ngFor="let value of values" value={{value}}>{{value}}</mat-checkbox>
+</div>
+
+<div *ngIf="values.length === 0">
+  <p>No category filters</p>
+</div>
