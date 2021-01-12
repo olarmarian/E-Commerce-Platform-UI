@@ -15,6 +15,13 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   products: ProductModel[] = [];
   productFilters: ProductFiltersModel;
   areFiltersLoading: boolean = true;
+
+  selectedFilters = {
+    categories: [],
+    minPrice: 0,
+    maxPrice: 0,
+  };
+
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
@@ -26,8 +33,32 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
       .getProductFilters()
       .subscribe((filters) => {
         this.productFilters = filters;
+        this.selectedFilters.minPrice = filters.priceLimits.minPrice;
+        this.selectedFilters.maxPrice = filters.priceLimits.maxPrice;
         this.areFiltersLoading = false;
       });
+  }
+
+  onCategoriesFilterChange($event: any) {
+    this.selectedFilters.categories = $event;
+    this.productsService.getFilteredProducts(this.formatLoadProductsFilters(this.selectedFilters));
+  }
+
+  onPriceChange(value){
+    this.selectedFilters.maxPrice = value;
+    this.productsService.getFilteredProducts(this.formatLoadProductsFilters(this.selectedFilters));
+  }
+
+  formatLoadProductsFilters(productsFilters): any {
+    return {
+      filters: {
+        categories: productsFilters.categories,
+        priceLimits: {
+          minPrice: productsFilters.minPrice,
+          maxPrice: productsFilters.maxPrice,
+        },
+      },
+    };
   }
 
   ngOnDestroy(): void {

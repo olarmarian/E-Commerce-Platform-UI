@@ -4,8 +4,11 @@
     <div class="ProductsFiltersContainer" *ngIf="!areFiltersLoading">
 
       <label>Filter by product category:</label>
-      <app-checkbox-filter [values]="productFilters.categories"></app-checkbox-filter>
-      
+      <app-checkbox-filter [values]="productFilters.categories" (filters)="onCategoriesFilterChange($event)">
+      </app-checkbox-filter>
+
+      <label>Filter by product price</label>
+      <app-price-filter [minValue]="productFilters.priceLimits.minPrice" [maxValue]="productFilters.priceLimits.maxPrice" (onSliderChange)="onPriceChange($event)" ></app-price-filter>      
     </div>
     <div class="ProductsFiltersContainer" *ngIf="areFiltersLoading">
       <p>No filters loaded</p>

@@ -1,5 +1,6 @@
 <div *ngIf="values.length !== 0" class="Checkbox__container">
-  <mat-checkbox color="accent" *ngFor="let value of values" value={{value}}>{{value}}</mat-checkbox>
+  <mat-checkbox color="accent" *ngFor="let value of values" value={{value}} [(ngModel)]="checkboxValues[value]" (change)="onValueCheck(value)">
+    {{value}}</mat-checkbox>
 </div>
 
 <div *ngIf="values.length === 0">

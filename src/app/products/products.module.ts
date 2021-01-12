@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ProductsService } from './products.service';
 import { ProductsPageComponent } from './pages/products-page/products-page.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatSliderModule } from '@angular/material/slider'; 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { CheckboxFilterComponent } from './components/checkbox-filter/checkbox-filter.component';
+import { PriceFilterComponent } from './components/price-filter/price-filter.component';
 
 @NgModule({
   imports: [
@@ -16,11 +19,14 @@ import { CheckboxFilterComponent } from './components/checkbox-filter/checkbox-f
     MatCardModule,
     MatCheckboxModule,
     MatDividerModule,
+    FormsModule,
+    MatSliderModule
   ],
   declarations: [
     ProductsPageComponent,
     ProductCardComponent,
     CheckboxFilterComponent,
+    PriceFilterComponent,
   ],
   providers: [ProductsService],
 })

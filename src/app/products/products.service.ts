@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductFiltersModel } from './models/product-filters.model';
 import ProductModel from './models/product.model';
 
@@ -10,15 +9,36 @@ import ProductModel from './models/product.model';
 })
 export class ProductsService {
   private productsUrl: string = 'http://localhost:3000/products';
+  private emptyFilters = {
+    filters:{
+      categories: [],
+      priceLimits:{
+        minPrice: 0,
+        maxPrice: 0
+      }
+    }
+  }
   private httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
     }),
   };
+
+  public products = new BehaviorSubject<ProductModel[]>([]);
+
   constructor(private http: HttpClient) {}
 
+  getFilteredProducts(filters: any) {
+    this.http
+      .post<ProductModel[]>(this.productsUrl + '/all', filters, this.httpOptions)
+      .subscribe((data) => {
+        this.products.next(data);
+      });
+  }
+  
   getProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(this.productsUrl, this.httpOptions);
+    this.getFilteredProducts(this.emptyFilters);
+    return this.products.asObservable();
   }
 
   getProductFilters(): Observable<ProductFiltersModel> {

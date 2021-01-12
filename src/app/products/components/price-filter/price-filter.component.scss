@@ -1,0 +1,20 @@
+.Slider__div--price {
+    width: 20rem;
+    padding: 5px 1em;
+    border: 1px solid #eeeeee;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    .mat-slider{
+        width: 100%;
+    }
+
+    .Slider__span--price {
+        width: fit-content;
+        color: #c2185b;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}

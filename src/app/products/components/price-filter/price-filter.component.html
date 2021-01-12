@@ -1,0 +1,6 @@
+<div class="Slider__div--price">
+  <mat-slider [min]="minValue" [max]="maxValue" [thumbLabel]="true" (change)="onSliderChange($event)"></mat-slider>
+
+  <span *ngIf="minValue!==sliderValue" class="Slider__span--price">${{minValue}} - ${{sliderValue}}</span>
+
+</div>

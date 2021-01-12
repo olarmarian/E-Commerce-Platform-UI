@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-checkbox-filter',
@@ -7,7 +7,24 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CheckboxFilterComponent implements OnInit {
   @Input('values') values: any[] = [];
-  constructor() {}
 
-  ngOnInit(): void {}
+  @Output('filters') checkboxValuesEmmiter = new EventEmitter();
+
+  checkboxValues = {};
+
+  onValueCheck() {
+    const filtersKeys = Object.keys(this.checkboxValues);
+    const filters = [];
+    filtersKeys.forEach((key) => {
+      if (this.checkboxValues[key]) filters.push(key);
+    });
+    this.checkboxValuesEmmiter.emit(filters);
+  }
+
+  constructor() {}
+  ngOnInit(): void {
+    this.values.forEach((value) => {
+      this.checkboxValues[value] = false;
+    });
+  }
 }
