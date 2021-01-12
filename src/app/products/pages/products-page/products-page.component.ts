@@ -25,10 +25,6 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.subs.sink = this.productsService.getProducts().subscribe((data) => {
-      this.products = data;
-    });
-
     this.subs.sink = this.productsService
       .getProductFilters()
       .subscribe((filters) => {
@@ -37,16 +33,26 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
         this.selectedFilters.maxPrice = filters.priceLimits.maxPrice;
         this.areFiltersLoading = false;
       });
+
+    this.subs.sink = this.productsService
+      .getProducts(this.formatLoadProductsFilters(this.selectedFilters))
+      .subscribe((data) => {
+        this.products = data;
+      });
   }
 
   onCategoriesFilterChange($event: any) {
     this.selectedFilters.categories = $event;
-    this.productsService.getFilteredProducts(this.formatLoadProductsFilters(this.selectedFilters));
+    this.productsService.getFilteredProducts(
+      this.formatLoadProductsFilters(this.selectedFilters)
+    );
   }
 
-  onPriceChange(value){
+  onPriceChange(value) {
     this.selectedFilters.maxPrice = value;
-    this.productsService.getFilteredProducts(this.formatLoadProductsFilters(this.selectedFilters));
+    this.productsService.getFilteredProducts(
+      this.formatLoadProductsFilters(this.selectedFilters)
+    );
   }
 
   formatLoadProductsFilters(productsFilters): any {
