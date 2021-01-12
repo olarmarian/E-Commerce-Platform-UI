@@ -9,15 +9,7 @@ import ProductModel from './models/product.model';
 })
 export class ProductsService {
   private productsUrl: string = 'http://localhost:3000/products';
-  private emptyFilters = {
-    filters:{
-      categories: [],
-      priceLimits:{
-        minPrice: 0,
-        maxPrice: 0
-      }
-    }
-  }
+  
   private httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -36,8 +28,8 @@ export class ProductsService {
       });
   }
   
-  getProducts(): Observable<ProductModel[]> {
-    this.getFilteredProducts(this.emptyFilters);
+  getProducts(filters: any): Observable<ProductModel[]> {
+    this.getFilteredProducts(filters);
     return this.products.asObservable();
   }
 
