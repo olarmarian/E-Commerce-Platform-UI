@@ -1,7 +1,9 @@
+import { PageResponseModel } from './models/page-response.model';
+import { PageRequestModel } from './models/page-request.model';
+import { FiltersMetadataModel } from './models/filters-metadata.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ProductFiltersModel } from './models/product-filters.model';
 import ProductModel from './models/product.model';
 
 @Injectable({
@@ -9,7 +11,7 @@ import ProductModel from './models/product.model';
 })
 export class ProductsService {
   private productsUrl: string = 'http://localhost:3000/products';
-  
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -20,20 +22,20 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
-  getFilteredProducts(filters: any) {
+  getFilteredProducts(pageRequest: PageRequestModel) {
     this.http
-      .post<ProductModel[]>(this.productsUrl + '/all', filters, this.httpOptions)
+      .post<PageResponseModel>(this.productsUrl + '/all', pageRequest, this.httpOptions)
       .subscribe((data) => {
-        this.products.next(data);
+        this.products.next(data.products);
       });
   }
-  
-  getProducts(filters: any): Observable<ProductModel[]> {
-    this.getFilteredProducts(filters);
+
+  getProducts(pageRequest: PageRequestModel): Observable<ProductModel[]> {
+    this.getFilteredProducts(pageRequest);
     return this.products.asObservable();
   }
 
-  getProductFilters(): Observable<ProductFiltersModel> {
-    return this.http.get<any>(`${this.productsUrl}/filters`, this.httpOptions);
+  getProductFilters(): Observable<FiltersMetadataModel> {
+    return this.http.get<any>(`${this.productsUrl}/metadata`, this.httpOptions);
   }
 }

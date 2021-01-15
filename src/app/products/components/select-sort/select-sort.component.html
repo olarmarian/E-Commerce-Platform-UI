@@ -1,0 +1,9 @@
+
+<div class="Sort__Container">
+  <mat-form-field appearance="fill">
+    <mat-label class="mat-label-color">Select a sorting option</mat-label>
+    <mat-select  [(value)]="selected" (selectionChange)="onSelectChange($event)">
+      <mat-option class="mat-option-color" *ngFor="let option of options" value={{option}}>{{option}}</mat-option>
+  </mat-select>
+  </mat-form-field>
+</div>

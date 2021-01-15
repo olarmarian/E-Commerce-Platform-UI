@@ -1,6 +1,8 @@
+import { CategoryEnum } from './../../models/category.enum';
+import { PageRequestModel } from './../../models/page-request.model';
+import { FiltersMetadataModel } from './../../models/filters-metadata.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubSink } from 'subsink';
-import { ProductFiltersModel } from '../../models/product-filters.model';
 import ProductModel from '../../models/product.model';
 import { ProductsService } from '../../products.service';
 
@@ -13,58 +15,69 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
   products: ProductModel[] = [];
-  productFilters: ProductFiltersModel;
+  productFilters: FiltersMetadataModel;
   areFiltersLoading: boolean = true;
 
-  selectedFilters = {
+  requestMetadata = {
     categories: [],
     minPrice: 0,
     maxPrice: 0,
+    sort: ''
   };
 
-  constructor(private productsService: ProductsService) {}
+
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.subs.sink = this.productsService
       .getProductFilters()
       .subscribe((filters) => {
         this.productFilters = filters;
-        this.selectedFilters.minPrice = filters.priceLimits.minPrice;
-        this.selectedFilters.maxPrice = filters.priceLimits.maxPrice;
+        this.requestMetadata.minPrice = filters.priceLimits.minPrice;
+        this.requestMetadata.maxPrice = filters.priceLimits.maxPrice;
         this.areFiltersLoading = false;
       });
 
     this.subs.sink = this.productsService
-      .getProducts(this.formatLoadProductsFilters(this.selectedFilters))
+      .getProducts(this.formatLoadProductsFilters(this.requestMetadata))
       .subscribe((data) => {
         this.products = data;
       });
   }
 
   onCategoriesFilterChange($event: any) {
-    this.selectedFilters.categories = $event;
+    this.requestMetadata.categories = $event;
     this.productsService.getFilteredProducts(
-      this.formatLoadProductsFilters(this.selectedFilters)
+      this.formatLoadProductsFilters(this.requestMetadata)
     );
   }
 
   onPriceChange(value) {
-    this.selectedFilters.maxPrice = value;
+    this.requestMetadata.maxPrice = value;
     this.productsService.getFilteredProducts(
-      this.formatLoadProductsFilters(this.selectedFilters)
+      this.formatLoadProductsFilters(this.requestMetadata)
     );
   }
 
+  onSortChange(value){
+    this.requestMetadata.sort = value;
+    this.productsService.getFilteredProducts(
+      this.formatLoadProductsFilters(this.requestMetadata)
+    );
+  }
   formatLoadProductsFilters(productsFilters): any {
     return {
-      filters: {
-        categories: productsFilters.categories,
-        priceLimits: {
-          minPrice: productsFilters.minPrice,
-          maxPrice: productsFilters.maxPrice,
+      pageRequest: {
+        filters: {
+          categories: productsFilters.categories,
+          priceLimits: {
+            minPrice: productsFilters.minPrice,
+            maxPrice: productsFilters.maxPrice
+          }
         },
-      },
-    };
+        sort: productsFilters.sort
+      }
+    }
   }
 
   ngOnDestroy(): void {
