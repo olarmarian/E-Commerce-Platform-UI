@@ -8,11 +8,14 @@
       </app-checkbox-filter>
 
       <label>Filter by product price</label>
-      <app-price-filter [minValue]="productFilters.priceLimits.minPrice" [maxValue]="productFilters.priceLimits.maxPrice" (onSliderChange)="onPriceChange($event)" ></app-price-filter>      
+      <app-price-filter [minValue]="productFilters.priceLimits.minPrice" [maxValue]="productFilters.priceLimits.maxPrice" (onSliderChange)="onPriceChange($event)" ></app-price-filter>
+      <label>Sort</label>
+      <app-select-sort (onSelectChange)="onSortChange($event)"></app-select-sort>
     </div>
     <div class="ProductsFiltersContainer" *ngIf="areFiltersLoading">
       <p>No filters loaded</p>
     </div>
+
     <div class="ProductsGridLayout">
       <app-product-card *ngFor="let product of products" [product]='product'></app-product-card>
     </div>

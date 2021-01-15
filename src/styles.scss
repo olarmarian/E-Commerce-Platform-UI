@@ -16,7 +16,7 @@ body {
   width: 70%;
   display: flex;
   margin-top: 1em;
-
+  justify-content: space-evenly;
   *{
     &:focus {
         outline: none;

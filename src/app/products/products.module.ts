@@ -6,11 +6,13 @@ import { ProductsPageComponent } from './pages/products-page/products-page.compo
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatSliderModule } from '@angular/material/slider'; 
+import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule} from '@angular/material/select';
 import { CheckboxFilterComponent } from './components/checkbox-filter/checkbox-filter.component';
 import { PriceFilterComponent } from './components/price-filter/price-filter.component';
+import { SelectSortComponent } from './components/select-sort/select-sort.component';
 
 @NgModule({
   imports: [
@@ -20,13 +22,16 @@ import { PriceFilterComponent } from './components/price-filter/price-filter.com
     MatCheckboxModule,
     MatDividerModule,
     FormsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSelectModule
+
   ],
   declarations: [
     ProductsPageComponent,
     ProductCardComponent,
     CheckboxFilterComponent,
     PriceFilterComponent,
+    SelectSortComponent,
   ],
   providers: [ProductsService],
 })
