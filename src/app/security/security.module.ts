@@ -5,7 +5,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   imports: [
@@ -15,8 +17,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent, SignupPageComponent],
+  providers: [AuthService],
 })
 export class SecurityModule {}

@@ -1,8 +1,12 @@
 <header class="Header">
   <h1>E-Commerce Platform</h1>
-  <div class="Header__div--action">
-    <button mat-flat-button color="primary" (click)="onLogin()">Login</button>
-    <button mat-flat-button color="secondary" (click)="onRegister()">Register</button>
+  <div class="Header__div--action" *ngIf="!isAuthenticated()">
+    <button mat-flat-button color="primary" (click)="onLoginClick()">Login</button>
+    <button mat-flat-button color="secondary" (click)="onSignUpClick()">Sign Up</button>
+  </div>
 
+  <div class="Header__div--action" *ngIf="isAuthenticated()">
+    
+    <button mat-flat-button color="secondary" (click)="onLogOutClick()">Log out</button>
   </div>
 </header>

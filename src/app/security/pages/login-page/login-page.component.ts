@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthorizationService } from '../../authorization.service';
-import LoginRequestModel from '../../models/login-request.model';
-import LoginResponseModel from '../../models/login-response.model';
+import { AuthService } from '../../auth.service';
+import { AuthCredentialsModel } from '../../models/auth-credentials.model';
+import { AuthResponseModel } from '../../models/auth-response.model';
 
 @Component({
   selector: 'app-login-page',
@@ -12,37 +12,46 @@ import LoginResponseModel from '../../models/login-response.model';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+  loginForm: FormGroup;
+  submitted: boolean;
+
   constructor(
-    private authService: AuthorizationService,
+    private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
-  loginForm: FormGroup;
-
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
+
+    this.submitted = false;
   }
 
   performLogin() {
-    const credentials: LoginRequestModel = {
-      credentials: {
+    if (this.loginForm.invalid) {
+      this.submitted = true;
+    } else {
+      const credentials: AuthCredentialsModel = {
         email: this.loginForm.get('email').value,
         password: this.loginForm.get('password').value,
-      },
-    };
+      };
 
-    this.authService.login(credentials).subscribe(
-      (response: LoginResponseModel) => {
-        localStorage.setItem('TOKEN', response.token);
-        this.router.navigate(['/products']);
-      },
-      (error) => {
-        this.snackBar.open(error.message, 'LOGIN_ERROR', { duration: 3000 });
-      }
-    );
+      this.authService.login(credentials).subscribe(
+        (response: AuthResponseModel) => {
+          localStorage.setItem('TOKEN', response.token);
+          this.router.navigate(['/products']);
+        },
+        (error) => {
+          console.log(error.message, 'login error');
+          this.snackBar.open('Invalid credentials.', '', { duration: 3000 });
+        }
+      );
+    }
   }
 }
