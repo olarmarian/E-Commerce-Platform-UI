@@ -1,4 +1,4 @@
-export default interface LoginCredentialsModel {
+export interface AuthCredentialsModel {
   readonly email: string;
   readonly password: string;
 }

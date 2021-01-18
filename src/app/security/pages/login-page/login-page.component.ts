@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthorizationService } from '../../authorization.service';
-import LoginRequestModel from '../../models/login-request.model';
-import LoginResponseModel from '../../models/login-response.model';
+import { AuthService } from '../../auth.service';
+import { AuthCredentialsModel } from '../../models/auth-credentials.model';
+import { AuthResponseModel } from '../../models/auth-response.model';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +13,7 @@ import LoginResponseModel from '../../models/login-response.model';
 })
 export class LoginPageComponent implements OnInit {
   constructor(
-    private authService: AuthorizationService,
+    private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -28,15 +28,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   performLogin() {
-    const credentials: LoginRequestModel = {
-      credentials: {
-        email: this.loginForm.get('email').value,
-        password: this.loginForm.get('password').value,
-      },
+    const credentials: AuthCredentialsModel = {
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value,
     };
 
     this.authService.login(credentials).subscribe(
-      (response: LoginResponseModel) => {
+      (response: AuthResponseModel) => {
         localStorage.setItem('TOKEN', response.token);
         this.router.navigate(['/products']);
       },

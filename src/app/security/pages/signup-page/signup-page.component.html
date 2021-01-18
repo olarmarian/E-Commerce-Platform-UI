@@ -1,0 +1,17 @@
+<div class="Page">
+  <div class="Page__content">
+    <mat-card>
+      <h1>Sign up to ECP</h1>
+      <mat-card-content>
+        <div [formGroup]="signupForm" class="d-flex flex-column">
+          <input class="input-field" type="text" formControlName="email" placeholder="E-mail">
+
+          <input class="input-field" type="password" formControlName="password" placeholder="Password">
+        </div>
+        <button class="btn--signup" mat-raised-button color="primary" type="button" (click)="performSignUp()">Sign
+          Up</button>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
