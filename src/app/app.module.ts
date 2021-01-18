@@ -8,6 +8,8 @@ import { ProductsModule } from './products/products.module';
 import { SecurityModule } from './security/security.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     SharedModule,
     ProductsModule,
-    SecurityModule
+    SecurityModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -6,7 +6,12 @@
   </div>
 
   <div class="Header__div--action" *ngIf="isAuthenticated()">
-    
-    <button mat-flat-button color="secondary" (click)="onLogOutClick()">Log out</button>
+    <mat-icon class="user_icon" [matMenuTriggerFor]="userMenu">account_circle</mat-icon>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Hi, </button>
+      <button mat-menu-item>Orders History</button>
+      <button mat-menu-item (click)="onLogOutClick()">Log out</button>
+    </mat-menu>
   </div>
+
 </header>
