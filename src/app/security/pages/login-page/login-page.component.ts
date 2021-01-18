@@ -22,6 +22,7 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.submitted = false;
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -29,8 +30,6 @@ export class LoginPageComponent implements OnInit {
         Validators.minLength(6),
       ]),
     });
-
-    this.submitted = false;
   }
 
   performLogin() {

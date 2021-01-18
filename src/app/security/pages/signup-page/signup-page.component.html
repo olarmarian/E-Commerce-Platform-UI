@@ -1,25 +1,29 @@
 <div class="Page">
   <div class="Page__content">
     <mat-card>
-      <h1>Sign up to ECP</h1>
+      <h1>Sign up to <span class="title">ECP</span></h1>
       <mat-card-content>
-        <div [formGroup]="signupForm" class="d-flex flex-column">
-          <div>
-            <input class="input-field" type="text" formControlName="email" placeholder="E-mail">
-            <p *ngIf="submitted && signupForm.get('email').invalid" class="alert alert-danger">Invalid email!</p>
+        <form [formGroup]="signupForm" class="d-flex flex-column">
+          <div class="d-flex flex-column input-container">
+            <label for="email">Email</label>
+            <input id="email" class="input-field" type="text" formControlName="email" placeholder="Enter your email"
+              [ngStyle]="{'border-color': submitted && signupForm.get('email').invalid ? 'var(--app-primary)' : 'var(--app-accent)'}">>
+            <p class="p--error" *ngIf="submitted && signupForm.get('email').invalid">Invalid email!</p>
           </div>
 
-          <div>
-            <input class="input-field" type="password" formControlName="password" placeholder="Password">
-            <p *ngIf="submitted && signupForm.get('password').invalid" class="alert alert-danger">Invalid password!</p>
+          <div class="d-flex flex-column input-container">
+            <label for="password">Password</label>
+            <input class="input-field" type="password" formControlName="password" placeholder="Password"
+              [ngStyle]="{'border-color': submitted && signupForm.get('password').invalid ? 'var(--app-primary)' : 'var(--app-accent)'}">
+            <p class="p--error" *ngIf="submitted && signupForm.get('password').invalid">Invalid password!</p>
           </div>
-        </div>
-        <button class="btn--signup" mat-raised-button color="primary" type="button" (click)="performSignUp()">Sign
-          Up</button>
+          <button class="btn--signup" mat-raised-button color="primary" type="button" (click)="performSignUp()">Sign
+            Up</button>
 
-        <div class="div--info">
-          <p>Already have an account? <a href="/login" class="font-weight-bold">Log In</a></p>
-        </div>
+          <div class="div--info">
+            <p>Already have an account? <a href="/login" class="a--accent">Log In</a></p>
+          </div>
+        </form>
       </mat-card-content>
     </mat-card>
   </div>

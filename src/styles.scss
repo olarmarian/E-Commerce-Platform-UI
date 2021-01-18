@@ -1,35 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
 
+:root {
+  --app-primary: #ff1e00;
+  --app-secondary: #e8f9fd;
+  --app-accent: #59ce8f;
+  --app-background: #e8f4f8 ;
+  --text-color: #808080;
+  --title-color: #1a1a1a;
+}
 
 html,
 body {
   height: 100%;
+  font-family: 'Montseratt';
+  font-weight: 500;
+  font-size: 22px;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.Page__content {
-  width: 70%;
-  display: flex;
-  margin-top: 1em;
-  justify-content: space-evenly;
-  *{
-    &:focus {
-        outline: none;
-    }
-}
 }
 
 .Page {
   display: flex;
   width: 100%;
-  height: 100vh - 12.8vh;
+  // height: min(100vh - 11.5vh);
   flex-direction: column;
   align-items: center;
+}
+
+.Page__content {
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1em;
+  padding: 5em 0;
+  * {
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 .Slider__div--price {

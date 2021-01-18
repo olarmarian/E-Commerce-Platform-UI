@@ -1,14 +1,19 @@
 .Page {
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(#123412, #aaaaaa);
+  background-color: var(--app-background);
 }
 
 .Page__content {
-  width: 40em;
-  height: 45em;
+  width: 45em;
+
+  h1 {
+    margin-top: 1em;
+    font-size: 34px;
+    font-weight: 500;
+    color: var(--title-color);
+  }
 }
 
 .mat-card {
@@ -20,56 +25,79 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  h1 {
-    margin-top: 1em;
-    font-size: 30px;
-    font-weight: 500;
-    color: #123412;
-  }
 }
 
+
+.title {
+  font-weight: bold;
+  color: var(--app-accent);
+}
+
+label {
+  color: var(--text-color);
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+
 .mat-card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
   margin-top: 1.5em;
 
   * {
     margin: .6em 0;
   }
 
-  .input-field {
-    width: 400px;
-    border: 1px solid #eeccee;
-    -webkit-box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.28);
-    box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.10);
-    border-radius: 5px;
-    padding: 15px 10px;
-    font-size: 16px;
-  }
-
-  .btn--login {
-    width: 60%;
-    border-radius: 10px;
-    padding: 5px 0;
-  }
-
-  .div--info {
+  form {
+    width: fit-content;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    p {
-      color: #123412;
+    .input-container {
+      height: 130px;
+
+
+
+      .input-field {
+        width: 350px;
+        border: 1px solid #eeccee;
+        -webkit-box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.28);
+        box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.10);
+        border-radius: 5px;
+        padding: 15px 10px;
+        border-color: var(--app-accent);
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .p--error {
+        margin: 0;
+        color: var(--app-primary)
+      }
+
+
     }
 
-    a {
-      color: #123412;
-      text-decoration: none;
+    .btn--login {
+      width: 100%;
+      border-radius: 5px;
+      padding: 5px 0;
+      background-color: var(--app-accent);
     }
 
+    .div--info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        color: var(--text-color);
+      }
+
+      .a--accent {
+        color: var(--app-accent)
+      }
+    }
   }
 }
