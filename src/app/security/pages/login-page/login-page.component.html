@@ -4,9 +4,15 @@
       <h1>Login</h1>
       <mat-card-content>
         <div [formGroup]="loginForm" class="d-flex flex-column">
-          <input class="input-field" type="text" formControlName="email" placeholder="E-mail">
+          <div>
+            <input class="input-field" type="text" formControlName="email" placeholder="E-mail">
+            <p *ngIf="loginForm.get('email').invalid" class="alert alert-danger">Invalid email!</p>
+          </div>
 
-          <input class="input-field" type="password" formControlName="password" placeholder="Password">
+          <div>
+            <input class="input-field" type="password" formControlName="password" placeholder="Password">
+            <p *ngIf="loginForm.get('password').invalid" class="alert alert-danger">Invalid password!</p>
+          </div>
         </div>
         <button class="btn--login" mat-raised-button color="primary" type="button" (click)="performLogin()">Log
           in</button>

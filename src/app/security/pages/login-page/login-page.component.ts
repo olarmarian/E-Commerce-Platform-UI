@@ -12,35 +12,46 @@ import { AuthResponseModel } from '../../models/auth-response.model';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+  loginForm: FormGroup;
+  submitted: boolean;
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
-  loginForm: FormGroup;
-
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
+
+    this.submitted = false;
   }
 
   performLogin() {
-    const credentials: AuthCredentialsModel = {
-      email: this.loginForm.get('email').value,
-      password: this.loginForm.get('password').value,
-    };
+    if (this.loginForm.invalid) {
+      this.submitted = true;
+    } else {
+      const credentials: AuthCredentialsModel = {
+        email: this.loginForm.get('email').value,
+        password: this.loginForm.get('password').value,
+      };
 
-    this.authService.login(credentials).subscribe(
-      (response: AuthResponseModel) => {
-        localStorage.setItem('TOKEN', response.token);
-        this.router.navigate(['/products']);
-      },
-      (error) => {
-        this.snackBar.open(error.message, 'LOGIN_ERROR', { duration: 3000 });
-      }
-    );
+      this.authService.login(credentials).subscribe(
+        (response: AuthResponseModel) => {
+          localStorage.setItem('TOKEN', response.token);
+          this.router.navigate(['/products']);
+        },
+        (error) => {
+          console.log(error.message, 'login error');
+          this.snackBar.open('Invalid credentials.', '', { duration: 3000 });
+        }
+      );
+    }
   }
 }

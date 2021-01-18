@@ -12,6 +12,8 @@ import { AuthService } from '../../auth.service';
 export class SignupPageComponent implements OnInit {
   signupForm: FormGroup;
 
+  submitted: boolean;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -21,25 +23,38 @@ export class SignupPageComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
+
+    this.submitted = false;
   }
 
   performSignUp() {
-    const credentials = {
-      credentials: {
-        email: this.signupForm.get('email').value,
-        password: this.signupForm.get('password').value,
-      },
-    };
-    this.authService.signup(credentials).subscribe(
-      () => {
-        this.snackBar.open('User created!', '', { duration: 3000 });
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        this.snackBar.open(error.message, 'SIGNUP_ERROR', { duration: 3000 });
-      }
-    );
+    if (this.signupForm.invalid) {
+      this.submitted = true;
+    } else {
+      const credentials = {
+        credentials: {
+          email: this.signupForm.get('email').value,
+          password: this.signupForm.get('password').value,
+        },
+      };
+      this.authService.signup(credentials).subscribe(
+        (response) => {
+          this.snackBar.open(response.message, '', { duration: 3000 });
+
+          if (response.success) {
+            this.router.navigate(['/login']);
+          }
+        },
+        (error) => {
+          console.log(error.message, 'signup error');
+          this.snackBar.open('Unknown error.', '', { duration: 3000 });
+        }
+      );
+    }
   }
 }
