@@ -1,25 +1,29 @@
 <div class="Page">
   <div class="Page__content">
     <mat-card>
-      <h1>Login</h1>
+      <h1>Login to <span class="title">ECP</span></h1>
       <mat-card-content>
-        <div [formGroup]="loginForm" class="d-flex flex-column">
-          <div>
-            <input class="input-field" type="text" formControlName="email" placeholder="E-mail">
-            <p *ngIf="loginForm.get('email').invalid" class="alert alert-danger">Invalid email!</p>
+        <form [formGroup]="loginForm" class="d-flex flex-column">
+          <div class="d-flex flex-column input-container">
+            <label for="email">Email</label>
+            <input id="email" class="input-field" type="text" formControlName="email" placeholder="Enter your email"
+              [ngStyle]="{'border-color': submitted && loginForm.get('email').invalid ?  'var(--app-primary)' : 'var(--app-accent)'}">
+            <p *ngIf="submitted && loginForm.get('email').invalid" class="p--error">Invalid email!</p>
           </div>
 
-          <div>
-            <input class="input-field" type="password" formControlName="password" placeholder="Password">
-            <p *ngIf="loginForm.get('password').invalid" class="alert alert-danger">Invalid password!</p>
+          <div class="d-flex flex-column input-container">
+            <label for="password">Password</label>
+            <input id="password" class="input-field" type="password" formControlName="password" placeholder="Password"
+              [ngStyle]="{'border-color': submitted && loginForm.get('password').invalid ? 'var(--app-primary)' : 'var(--app-accent)'}">
+            <p *ngIf="submitted && loginForm.get('password').invalid" class="p--error">Invalid password!</p>
           </div>
-        </div>
-        <button class="btn--login" mat-raised-button color="primary" type="button" (click)="performLogin()">Log
-          in</button>
-        <div class="div--info">
-          <p>Don't have an account? <a href="/signup" class="font-weight-bold">Sign Up</a></p>
-          <a href="#" class="font-weight-bold">Forgot password?</a>
-        </div>
+          <button class="btn--login" mat-raised-button color="primary" type="button" (click)="performLogin()">Log
+            in</button>
+          <div class="div--info">
+            <p>Don't have an account? <a href="/signup" class="a--accent">Sign Up</a></p>
+            <a href="#" class="a--accent">Forgot password?</a>
+          </div>
+        </form>
       </mat-card-content>
     </mat-card>
   </div>
