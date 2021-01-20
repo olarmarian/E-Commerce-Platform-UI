@@ -3,10 +3,10 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
 
 :root {
-  --app-primary: #ff1e00;
-  --app-secondary: #e8f9fd;
+  --app-primary: #ff7050;
+  --app-secondary: #fafafa;
   --app-accent: #59ce8f;
-  --app-background: #e8f4f8 ;
+  --app-background: #eeeeee;
   --text-color: #808080;
   --title-color: #1a1a1a;
 }
@@ -24,15 +24,11 @@ body {
 }
 
 .Page {
-  display: flex;
-  width: 100%;
-  // height: min(100vh - 11.5vh);
-  flex-direction: column;
-  align-items: center;
+  overflow: hidden;
 }
 
 .Page__content {
-  width: 70%;
+  // width: 70%;
   display: flex;
   justify-content: space-evenly;
   margin-top: 1em;
