@@ -4,6 +4,23 @@
     <button mat-flat-button color="primary" (click)="onLoginClick()">Login</button>
     <button mat-flat-button color="secondary" (click)="onSignUpClick()">Sign Up</button>
   </div>
+  <form class="example-form">
+    <mat-form-field class="search-bar" appearance="outline">
+      <mat-label>Search product</mat-label>
+      <mat-icon matSuffix>search</mat-icon>
+      <input [formControl]="searchBarControl"
+             [matAutocomplete]="auto"
+             aria-label="Number"
+             matInput
+             (keyup)="onProductNameFilterChange()"
+             type="text">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of productNamesToAutocomplete" [value]="option.id">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 
   <div class="Header__div--action" *ngIf="isAuthenticated()">
     <mat-icon class="user_icon" [matMenuTriggerFor]="userMenu">account_circle</mat-icon>
