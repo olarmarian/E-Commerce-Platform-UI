@@ -15,7 +15,7 @@
              (keyup)="onProductNameFilterChange()"
              type="text">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of productNameToAutocomplete" [value]="option.id">
+        <mat-option *ngFor="let option of productNamesToAutocomplete" [value]="option.id">
           {{option.name}}
         </mat-option>
       </mat-autocomplete>

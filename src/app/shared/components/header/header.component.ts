@@ -12,7 +12,7 @@ import {ProductsService} from '../../../products/products.service';
 })
 export class HeaderComponent implements OnInit {
   searchBarControl = new FormControl();
-  productNameToAutocomplete;
+  productNamesToAutocomplete: [];
   private subs = new SubSink();
   constructor(private authService: AuthService,
               private router: Router,
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
   onProductNameFilterChange() {
     const productName =  this.searchBarControl.value;
     this.subs.sink = this.productsService.getProductsByName(productName).subscribe((data) => {
-      this.productNameToAutocomplete = data.products;
+      this.productNamesToAutocomplete = data.products;
    });
   }
 
