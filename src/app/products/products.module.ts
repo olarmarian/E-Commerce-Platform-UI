@@ -9,10 +9,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CheckboxFilterComponent } from './components/checkbox-filter/checkbox-filter.component';
 import { PriceFilterComponent } from './components/price-filter/price-filter.component';
 import { SelectSortComponent } from './components/select-sort/select-sort.component';
+import { PaginationActionsComponent } from './components/pagination-actions/pagination-actions.component';
 
 @NgModule({
   imports: [
@@ -23,8 +25,8 @@ import { SelectSortComponent } from './components/select-sort/select-sort.compon
     MatDividerModule,
     FormsModule,
     MatSliderModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatPaginatorModule
   ],
   declarations: [
     ProductsPageComponent,
@@ -32,6 +34,7 @@ import { SelectSortComponent } from './components/select-sort/select-sort.compon
     CheckboxFilterComponent,
     PriceFilterComponent,
     SelectSortComponent,
+    PaginationActionsComponent,
   ],
   providers: [ProductsService],
 })
