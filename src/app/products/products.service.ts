@@ -19,6 +19,7 @@ export class ProductsService {
   };
 
   public products = new BehaviorSubject<ProductModel[]>([]);
+  public total = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {}
 
@@ -27,12 +28,17 @@ export class ProductsService {
       .post<PageResponseModel>(this.productsUrl + '/all', pageRequest, this.httpOptions)
       .subscribe((data) => {
         this.products.next(data.products);
+        this.total.next(data.total);
       });
   }
 
   getProducts(pageRequest: PageRequestModel): Observable<ProductModel[]> {
     this.getFilteredProducts(pageRequest);
     return this.products.asObservable();
+  }
+
+  getTotal(): Observable<number>{
+    return this.total.asObservable();
   }
 
   getProductFilters(): Observable<FiltersMetadataModel> {

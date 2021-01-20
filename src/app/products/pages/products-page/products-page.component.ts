@@ -1,5 +1,3 @@
-import { CategoryEnum } from './../../models/category.enum';
-import { PageRequestModel } from './../../models/page-request.model';
 import { FiltersMetadataModel } from './../../models/filters-metadata.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubSink } from 'subsink';
@@ -22,11 +20,13 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     categories: [],
     minPrice: 0,
     maxPrice: 0,
-    sort: ''
+    sort: '',
+    pageSize: 10,
+    page: 0,
+    total: 0,
   };
 
-
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.subs.sink = this.productsService
@@ -39,45 +39,62 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
       });
 
     this.subs.sink = this.productsService
-      .getProducts(this.formatLoadProductsFilters(this.requestMetadata))
+      .getProducts(this.formatProductsPageRequest(this.requestMetadata))
       .subscribe((data) => {
         this.products = data;
       });
+    this.subs.sink = this.productsService.getTotal().subscribe((data) => {
+      this.requestMetadata.total = data;
+    });
   }
 
   onCategoriesFilterChange($event: any) {
     this.requestMetadata.categories = $event;
     this.productsService.getFilteredProducts(
-      this.formatLoadProductsFilters(this.requestMetadata)
+      this.formatProductsPageRequest(this.requestMetadata)
     );
   }
 
   onPriceChange(value) {
     this.requestMetadata.maxPrice = value;
     this.productsService.getFilteredProducts(
-      this.formatLoadProductsFilters(this.requestMetadata)
+      this.formatProductsPageRequest(this.requestMetadata)
     );
   }
 
-  onSortChange(value){
+  onSortChange(value) {
     this.requestMetadata.sort = value;
     this.productsService.getFilteredProducts(
-      this.formatLoadProductsFilters(this.requestMetadata)
+      this.formatProductsPageRequest(this.requestMetadata)
     );
   }
-  formatLoadProductsFilters(productsFilters): any {
+
+  onPaginationChange(value) {
+    this.requestMetadata.page = value.pageIndex;
+    this.requestMetadata.pageSize = value.pageSize;
+
+    this.productsService.getFilteredProducts(
+      this.formatProductsPageRequest(this.requestMetadata)
+    );
+  }
+
+  formatProductsPageRequest(requestMetadata): any {
     return {
       pageRequest: {
         filters: {
-          categories: productsFilters.categories,
+          categories: requestMetadata.categories,
           priceLimits: {
-            minPrice: productsFilters.minPrice,
-            maxPrice: productsFilters.maxPrice
-          }
+            minPrice: requestMetadata.minPrice,
+            maxPrice: requestMetadata.maxPrice,
+          },
         },
-        sort: productsFilters.sort
-      }
-    }
+        sort: requestMetadata.sort,
+        pagination: {
+          page: requestMetadata.page,
+          size: requestMetadata.pageSize,
+        },
+      },
+    };
   }
 
   ngOnDestroy(): void {
