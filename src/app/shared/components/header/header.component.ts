@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
 import {FormControl} from '@angular/forms';
@@ -10,7 +10,7 @@ import {ProductsService} from '../../../products/products.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   searchBarControl = new FormControl();
   productNamesToAutocomplete: [];
   private subs = new SubSink();
@@ -44,4 +44,7 @@ export class HeaderComponent implements OnInit {
    });
   }
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
 }
