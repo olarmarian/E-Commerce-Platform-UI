@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
+import {FormControl} from '@angular/forms';
+import {SubSink} from 'subsink';
+import {ProductsService} from '../../../products/products.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +11,12 @@ import { AuthService } from 'src/app/security/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  searchBarControl = new FormControl();
+  productNameToAutocomplete;
+  private subs = new SubSink();
+  constructor(private authService: AuthService,
+              private router: Router,
+              private productsService: ProductsService) {}
 
   ngOnInit(): void {}
 
@@ -28,4 +36,12 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['products']);
   }
+
+  onProductNameFilterChange() {
+    const productName =  this.searchBarControl.value;
+    this.subs.sink = this.productsService.getProductsByName(productName).subscribe((data) => {
+      this.productNameToAutocomplete = data.products;
+   });
+  }
+
 }

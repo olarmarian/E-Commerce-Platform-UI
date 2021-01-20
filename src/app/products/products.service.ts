@@ -38,4 +38,8 @@ export class ProductsService {
   getProductFilters(): Observable<FiltersMetadataModel> {
     return this.http.get<any>(`${this.productsUrl}/metadata`, this.httpOptions);
   }
+
+  getProductsByName(name: string): Observable<any> {
+    return this.http.get<any>(`${this.productsUrl}?name=` + name, this.httpOptions);
+  }
 }
