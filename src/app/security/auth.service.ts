@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthCredentialsModel } from './models/auth-credentials.model';
 import { SignUpRequestModel } from './models/signup-request.model';
 import { AuthResponseModel } from './models/auth-response.model';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,9 @@ export class AuthService {
       'Access-Control-Allow-Origin': '*',
     }),
   };
+
+  private userEmail = new BehaviorSubject<string>(null);
+
   constructor(private http: HttpClient) {}
 
   login(credentials: AuthCredentialsModel): Observable<AuthResponseModel> {
@@ -40,6 +44,16 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getUserEmail(): Observable<string> {
+    const token = localStorage.getItem('TOKEN');
+    if (token) {
+      const decodedJwt: any = jwt_decode(token);
+      this.userEmail.next(decodedJwt.email);
+      return this.userEmail.asObservable();
+    }
+    return null;
   }
 
   logout() {

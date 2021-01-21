@@ -1,9 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
-import {FormControl} from '@angular/forms';
-import {SubSink} from 'subsink';
-import {ProductsService} from '../../../products/products.service';
+import { FormControl } from '@angular/forms';
+import { SubSink } from 'subsink';
+import { ProductsService } from '../../../products/products.service';
+import { ProfileService } from 'src/app/profile/services/profile.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +15,35 @@ import {ProductsService} from '../../../products/products.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   searchBarControl = new FormControl();
   productNamesToAutocomplete: [];
-  private subs = new SubSink();
-  constructor(private authService: AuthService,
-              private router: Router,
-              private productsService: ProductsService) {}
 
-  ngOnInit(): void {}
+  private subs = new SubSink();
+  email: string;
+  name: string;
+
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    private productsService: ProductsService,
+    private profileService: ProfileService
+  ) {}
+
+  ngOnInit(): void {
+    this.email = null;
+    this.name = null;
+    this.subs.sink = this.authService.getUserEmail().subscribe((data) => {
+      this.email = data;
+    });
+
+    this.subs.sink = this.profileService.getProfile(this.email).subscribe(
+      (response) => {
+        this.name = response.name;
+      },
+      (error) => {
+        this.snackBar.open(error.message, '', { duration: 3000 });
+      }
+    );
+  }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
@@ -32,16 +57,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['signup']);
   }
 
-  onLogOutClick(){
+  onLogOutClick() {
     this.authService.logout();
     this.router.navigate(['products']);
   }
 
   onProductNameFilterChange() {
-    const productName =  this.searchBarControl.value;
-    this.subs.sink = this.productsService.getProductsByName(productName).subscribe((data) => {
-      this.productNamesToAutocomplete = data.products;
-   });
+    const productName = this.searchBarControl.value;
+    this.subs.sink = this.productsService
+      .getProductsByName(productName)
+      .subscribe((data) => {
+        this.productNamesToAutocomplete = data.products;
+      });
   }
 
   ngOnDestroy(): void {
