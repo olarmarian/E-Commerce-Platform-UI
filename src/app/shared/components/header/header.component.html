@@ -1,19 +1,11 @@
 <header class="Header">
   <h1>E-Commerce Platform</h1>
-  <div class="Header__div--action" *ngIf="!isAuthenticated()">
-    <button mat-flat-button color="primary" (click)="onLoginClick()">Login</button>
-    <button mat-flat-button color="secondary" (click)="onSignUpClick()">Sign Up</button>
-  </div>
-  <form class="example-form">
+  <form class="mt-3">
     <mat-form-field class="search-bar" appearance="outline">
       <mat-label>Search product</mat-label>
       <mat-icon matSuffix>search</mat-icon>
-      <input [formControl]="searchBarControl"
-             [matAutocomplete]="auto"
-             aria-label="Number"
-             matInput
-             (keyup)="onProductNameFilterChange()"
-             type="text">
+      <input [formControl]="searchBarControl" [matAutocomplete]="auto" aria-label="Number" matInput
+        (keyup)="onProductNameFilterChange()" type="text">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
         <mat-option *ngFor="let option of productNamesToAutocomplete" [value]="option.id">
           {{option.name}}
@@ -22,10 +14,15 @@
     </mat-form-field>
   </form>
 
+  <div class="Header__div--action" *ngIf="!isAuthenticated()">
+    <button mat-flat-button color="primary" (click)="onLoginClick()">Login</button>
+    <button mat-flat-button color="secondary" (click)="onSignUpClick()">Sign Up</button>
+  </div>
+
   <div class="Header__div--action" *ngIf="isAuthenticated()">
     <mat-icon class="user_icon" [matMenuTriggerFor]="userMenu">account_circle</mat-icon>
     <mat-menu #userMenu="matMenu">
-      <button mat-menu-item>Hi, </button>
+      <button mat-menu-item>Hi, {{name}}</button>
       <button mat-menu-item>Orders History</button>
       <button mat-menu-item (click)="onLogOutClick()">Log out</button>
     </mat-menu>
