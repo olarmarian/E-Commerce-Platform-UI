@@ -5,12 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import ProductModel from './models/product.model';
+import { BASE_URL, CORE_URLS, PRODUCT_URLS } from '../constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private productsUrl: string = 'http://localhost:3000/products';
+  private productsUrl: string = BASE_URL + CORE_URLS.PRODUCTS;
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -25,7 +26,7 @@ export class ProductsService {
 
   getFilteredProducts(pageRequest: PageRequestModel) {
     this.http
-      .post<PageResponseModel>(this.productsUrl + '/all', pageRequest, this.httpOptions)
+      .post<PageResponseModel>(this.productsUrl + PRODUCT_URLS.ALL, pageRequest, this.httpOptions)
       .subscribe((data) => {
         this.products.next(data.products);
         this.total.next(data.total);
@@ -42,7 +43,7 @@ export class ProductsService {
   }
 
   getProductFilters(): Observable<FiltersMetadataModel> {
-    return this.http.get<any>(`${this.productsUrl}/metadata`, this.httpOptions);
+    return this.http.get<any>(this.productsUrl + PRODUCT_URLS.METADATA, this.httpOptions);
   }
 
   getProductsByName(name: string): Observable<any> {
