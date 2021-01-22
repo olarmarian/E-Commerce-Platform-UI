@@ -45,10 +45,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.snackBar.open(error.message, '', { duration: 3000 });
       }
     );
+    this.getCartItems();
   }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  getCartItems(){
+   const cartItems = localStorage.getItem('cart');
   }
 
   onLoginClick() {

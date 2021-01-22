@@ -15,11 +15,16 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addProductToCart(productId){
-    if (this.product?._id === productId) {
-      this.addedProductsToCart.push(this.product);
+  addProductToCart(product, productQuantity){
+    if (product._id){
+      const cart = {
+        productId: product._id,
+        quantity: productQuantity
+      };
+      this.addedProductsToCart.push(cart);
+      localStorage.setItem('cart', JSON.stringify(this.addedProductsToCart));
+      console.log(this.addedProductsToCart);
     }
-    localStorage.setItem('productId', JSON.stringify(this.addedProductsToCart));
   }
 
 }
