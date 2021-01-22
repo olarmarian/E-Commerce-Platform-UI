@@ -3,4 +3,5 @@ export interface AddressModel {
   number: string;
   country: string;
   city: string;
+  name: string,
 }

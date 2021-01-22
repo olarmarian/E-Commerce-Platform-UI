@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="cardForm">
+    <div class="div__input-container">
+      <label>Name</label>
+      <input class="input-field" formControlName="name" type="text" />
+      <p *ngIf="submitted && cardForm.get('name').invalid" class="p--error">Invalid name!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Card Number</label>
+      <input class="input-field" formControlName="number" type="text" />
+      <p *ngIf="submitted && cardForm.get('number').invalid" class="p--error">Invalid card number!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Card Owner</label>
+      <input class="input-field" formControlName="owner" type="text" />
+      <p *ngIf="submitted && cardForm.get('owner').invalid" class="p--error">Invalid name!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Card Expiry Date</label>
+      <input class="input-field" formControlName="expiryDate" type="text" />
+      <p *ngIf="submitted && cardForm.get('expiryDate').invalid" class="p--error">Invalid date!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Card Type</label>
+      <input class="input-field" formControlName="type" type="text" />
+      <p *ngIf="submitted && cardForm.get('type').invalid" class="p--error">Invalid card type!</p>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onSaveClick()">Save</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</mat-dialog-actions>

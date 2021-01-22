@@ -1,0 +1,27 @@
+<div class="Page">
+  <div class="Page__content row px-5">
+    <div class="col col-6" *ngIf="profile">
+      <app-grid-container-card [title]='cardsTitles.addresses' [limitItems]='4' [itemsNumber]="profile.addresses.length"
+        (onAddClick)="onAddressAdd()">
+        <ng-container *ngIf="profile.addresses.length !== 0">
+          <app-address-card *ngFor="let address of profile.addresses" [address]="address"
+            (onProfileReload)="reloadProfile()"></app-address-card>
+        </ng-container>
+
+        <p *ngIf="profile.addresses.length === 0">No saved addresses.</p>
+
+      </app-grid-container-card>
+    </div>
+    <div class="col col-6" *ngIf="profile">
+      <app-grid-container-card [title]='cardsTitles.cards' [limitItems]='4' [itemsNumber]="profile.cards.length"
+        (onAddClick)="onCreditCardAdd()">
+        <ng-container *ngIf="profile.cards.length !== 0">
+
+          <app-credit-card *ngFor="let card of profile.cards" [card]="card" (onProfileReload)="reloadProfile()">
+          </app-credit-card>
+        </ng-container>
+        <p *ngIf="profile.cards.length === 0">No saved cards.</p>
+      </app-grid-container-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<mat-card class="GridLayoutCard mt-3 h-100">
+  <mat-card-title>{{title}}</mat-card-title>
+  <mat-card-content>
+    <div class="GridLayoutCard__content">
+      <ng-content></ng-content>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions class="GridLayoutCard__actions" *ngIf="limitItems !== itemsNumber">
+    <button class="GridLayoutCard__action--add" mat-fab matTooltip='Add' (click)="onAddClick()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

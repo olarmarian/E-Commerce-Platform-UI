@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-title>Alias: {{card.name}} </mat-card-title>
+  <mat-card-content>
+    <p>Owner: {{card.owner}}</p>
+    <p>Number: {{card.number}}</p>
+    <p>Expiry date: {{card.expiryDate}}</p>
+    <p>Type: {{card.type}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openEditCardPopup()">Edit</button>
+    <button mat-raised-button color="secondary" (click)="performDeleteCard()">Delete</button>
+  </mat-card-actions>
+</mat-card>

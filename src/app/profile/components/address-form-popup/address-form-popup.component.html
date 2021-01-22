@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="addressForm">
+    <div class="div__input-container">
+      <label>Name</label>
+      <input class="input-field" formControlName="name" type="text" />
+      <p *ngIf="submitted && addressForm.get('name').invalid" class="p--error">Invalid name!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Country</label>
+      <input class="input-field" formControlName="country" type="text" />
+      <p *ngIf="submitted && addressForm.get('country').invalid" class="p--error">Invalid country!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>City</label>
+      <input class="input-field" formControlName="city" type="text" />
+      <p *ngIf="submitted && addressForm.get('city').invalid" class="p--error">Invalid city!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Street</label>
+      <input class="input-field" formControlName="street" type="text" />
+      <p *ngIf="submitted && addressForm.get('street').invalid" class="p--error">Invalid street!</p>
+    </div>
+
+    <div class="div__input-container">
+      <label>Number</label>
+      <input class="input-field" formControlName="number" type="text" />
+      <p *ngIf="submitted && addressForm.get('number').invalid" class="p--error">Invalid number!</p>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onSaveClick()">Save</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-title>Name: {{address.name}} </mat-card-title>
+  <mat-card-content>
+    <p>Country: {{address.country}}</p>
+    <p>City: {{address.city}}</p>
+    <p>Street: {{address.street}}</p>
+    <p>Number: {{address.number}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openEditAddressModal()">Edit</button>
+    <button mat-raised-button color="secondary" (click)="performDeleteAddress()">Delete</button>
+  </mat-card-actions>
+</mat-card>

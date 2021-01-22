@@ -1,0 +1,21 @@
+.div__input-container {
+
+  display: flex;
+  flex-direction: column;
+
+  .input-field {
+    width: 350px;
+    border: 1px solid #eeccee;
+    -webkit-box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.28);
+    box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+    padding: 15px 10px;
+    border-color: var(--app-accent);
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .p--error {
+    color: var(--app-primary);
+  }
+}

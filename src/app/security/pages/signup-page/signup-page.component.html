@@ -7,7 +7,7 @@
           <div class="d-flex flex-column input-container">
             <label for="email">Email</label>
             <input id="email" class="input-field" type="text" formControlName="email" placeholder="Enter your email"
-              [ngStyle]="{'border-color': submitted && signupForm.get('email').invalid ? 'var(--app-primary)' : 'var(--app-accent)'}">>
+              [ngStyle]="{'border-color': submitted && signupForm.get('email').invalid ? 'var(--app-primary)' : 'var(--app-accent)'}">
             <p class="p--error" *ngIf="submitted && signupForm.get('email').invalid">Invalid email!</p>
           </div>
 

@@ -31,13 +31,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.email = null;
     this.name = null;
+
     this.subs.sink = this.authService.getUserEmail().subscribe((data) => {
       this.email = data;
     });
 
     this.subs.sink = this.profileService.getProfile(this.email).subscribe(
       (response) => {
-        this.name = response.name;
+        if (response) {
+          console.log(response, 'resp');
+          this.name = response.name;
+        }
       },
       (error) => {
         this.snackBar.open(error.message, '', { duration: 3000 });
@@ -60,6 +64,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogOutClick() {
     this.authService.logout();
     this.router.navigate(['products']);
+  }
+
+  onMyProfileClick() {
+    this.router.navigate(['my-profile']);
   }
 
   onProductNameFilterChange() {
