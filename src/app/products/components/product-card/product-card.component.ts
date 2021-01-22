@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CartService } from 'src/app/shared/services/cart.service';
 import ProductModel from '../../models/product.model';
-import {ProductsModule} from '../../products.module';
 
 @Component({
   selector: 'app-product-card',
@@ -10,21 +10,12 @@ import {ProductsModule} from '../../products.module';
 export class ProductCardComponent implements OnInit {
   @Input('product') product?: ProductModel;
   addedProductsToCart = [];
-  constructor() {}
+  constructor(private cartService: CartService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  addProductToCart(product) {
+    console.log(product, "Add to cart")
+    this.cartService.addToCart(product);
   }
-
-  addProductToCart(product, productQuantity){
-    if (product._id){
-      const cart = {
-        productId: product._id,
-        quantity: productQuantity
-      };
-      this.addedProductsToCart.push(cart);
-      localStorage.setItem('cart', JSON.stringify(this.addedProductsToCart));
-      console.log(this.addedProductsToCart);
-    }
-  }
-
 }

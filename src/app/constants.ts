@@ -3,6 +3,7 @@ export const BASE_URL = 'http://localhost:3000'; // Server API Local
 
 export const LABELS = {
   TOKEN: 'TOKEN',
+  CART: 'CART'
 };
 
 export const CORE_URLS = {

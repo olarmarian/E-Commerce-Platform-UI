@@ -6,6 +6,11 @@ import { SubSink } from 'subsink';
 import { ProductsService } from '../../../products/products.service';
 import { ProfileService } from 'src/app/profile/services/profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartService } from '../../services/cart.service';
+import { CartModel } from '../../models/cart.model';
+import { CartItemModel } from '../../models/cart-item.model';
+import ProductModel from 'src/app/products/models/product.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -19,15 +24,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   email: string;
   name: string;
-  itemsToCart = [{productName: 'BLUE MONALISA OVER HOODIE White', productImageUrl: 'https://cdn-images.farfetch-contents.com/16/04/72/60/16047260_31055558_480.jpg', price: 420, quantity: 1},
-    {productName: 'BLACK MONALISA OVER HOODIE White', productImageUrl: 'https://cdn-images.farfetch-contents.com/16/04/72/60/16047260_31055558_480.jpg', price: 400, quantity: 1}, {productName: 'BLACK MONALISA OVER HOODIE White', productImageUrl: 'https://cdn-images.farfetch-contents.com/16/04/72/60/16047260_31055558_480.jpg', price: 340, quantity: 1}];
+  cartData = new BehaviorSubject<any>({
+    items: [],
+    subtotal: 0,
+  });
 
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private productsService: ProductsService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -45,15 +53,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.snackBar.open(error.message, '', { duration: 3000 });
       }
     );
-    this.getCartItems();
+
+    this.subs.sink = this.cartService.getCart().subscribe((data) => {
+      const newCartData = {
+        items: [],
+        subtotal: 0,
+      };
+      console.log(data, 'data')
+
+      data.items.forEach((item: CartItemModel) => {
+        newCartData.items.push({
+          product: item.product,
+          quantity: item.quantity,
+        });
+
+        newCartData.subtotal =
+          newCartData.subtotal + item.product.price * item.quantity;
+      });
+      console.log(newCartData, 'new cart data')
+      this.cartData.next(newCartData);
+    });
   }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
-  }
-
-  getCartItems(){
-   const cartItems = localStorage.getItem('cart');
   }
 
   onLoginClick() {

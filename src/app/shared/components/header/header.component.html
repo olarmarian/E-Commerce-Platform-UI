@@ -35,28 +35,30 @@
     </div>
     <mat-menu #cartMenu="matMenu" class="cart-dropdown" style="background: #bababa">
       <div class="picked-items-cart">
-      <div *ngFor="let item of itemsToCart">
-        <div class="cart-item">
-          <div class="product-image-wrapper"><img src={{item.productImageUrl}} alt="product image" style="width: 100px; height: 120px; border-radius: 10px" /></div>
-          <div style="margin-top: 10px">
-            <span>${{item.price}}</span><br>
-            <span style="color: #7E7C7C; font-size: 12px;">{{item.productName}}</span><br>
-            <span style="color: #7E7C7C; font-size: 10px;">Qty.</span>
-            <div>
-              <button class="quantity-btn">-</button>
-              <input class="quantity-input" value="{{item.quantity}}" readonly>
-              <button  class="quantity-btn">+</button>
+        <div *ngFor="let item of (cartData | async).items">
+          <div class="cart-item">
+            <div class="product-image-wrapper"><img src={{item.product.image}} alt="product image"
+                style="width: 100px; height: 120px; border-radius: 10px" /></div>
+            <div style="margin-top: 10px">
+              <span>${{item.price}}</span><br>
+              <span style="color: #7E7C7C; font-size: 12px;">{{item.product.name}}</span><br>
+              <span style="color: #7E7C7C; font-size: 10px;">Qty.</span>
+              <div>
+                <button class="quantity-btn">-</button>
+                <input class="quantity-input" value="{{item.quantity}}" readonly>
+                <button class="quantity-btn">+</button>
+              </div>
             </div>
+            <div class="delete-item-icon"><img src='../../../../assets/images/delete.svg' alt="product image"
+                style="width: 20px; height: 20px;" /></div>
           </div>
-          <div class="delete-item-icon"><img src='../../../../assets/images/delete.svg' alt="product image" style="width: 20px; height: 20px;"/></div>
+          <mat-divider style="background: #C4C4C4"></mat-divider>
         </div>
-        <mat-divider style="background: #C4C4C4"></mat-divider>
-      </div>
       </div>
       <mat-divider style="background: #C4C4C4"></mat-divider>
       <div class="subtotal-container">
         <span style="font-size: 14px;">Sub-total</span>
-        <span style="font-size: 14px;">$3243</span>
+        <span style="font-size: 14px;">{{(cartData | async).subtotal | currency}}</span>
       </div>
       <button mat-raised-button class="checkout-btn">Orders History</button>
     </mat-menu>

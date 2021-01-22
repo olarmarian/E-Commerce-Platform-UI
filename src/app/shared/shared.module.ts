@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -28,5 +29,6 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDividerModule,
   ],
   exports: [HeaderComponent, FooterComponent],
+  providers: [CartService]
 })
 export class SharedModule {}
