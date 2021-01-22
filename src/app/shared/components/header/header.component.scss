@@ -19,9 +19,80 @@
   .user_icon {
     cursor: pointer;
   }
+
+  .shopping-cart-icon-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 28px;
+    cursor: pointer;
+  }
+
+  .shopping-cart-icon {
+    height: 28px;
+    width: 28px;
+  }
+
+  .cart-dropdown {
+    background: #fafafa;
+  }
 }
 
 .mat-form-field.search-bar {
   width: 400px;
+}
+
+.product-image-wrapper {
+  margin: 10px;
+}
+
+.cart-item {
+  display: grid;
+  flex-flow: row wrap;
+  grid-template-columns: 42% 38% 10%;
+  grid-template-rows: 30% 30% 30%;
+}
+
+.quantity-input {
+  height: 15px;
+  width: 35px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.quantity-btn {
+  background-color: #b5b2b2;
+  color: white;
+  height: 18px;
+  width: 18px;
+  border-radius: 10px;
+  line-height: 6px;
+}
+.delete-item-icon {
+  grid-area: 3/4;
+  margin-right: 10px;
+}
+
+::ng-deep.mat-menu-panel {
+  background: #fafafa !important;
+}
+
+.picked-items-cart{
+  overflow-y: auto;
+  height: 300px;
+}
+
+.subtotal-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.checkout-btn {
+  background-color: #ff7050;
+  color: white;
+  width: 200px;
+  margin-left: 15%;
+
 }
 

@@ -10,6 +10,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -24,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatInputModule,
     MatSnackBarModule,
+    MatDividerModule,
   ],
   exports: [HeaderComponent, FooterComponent],
 })

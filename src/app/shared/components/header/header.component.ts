@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   email: string;
   name: string;
+  itemsToCart = [{productName: 'BLUE MONALISA OVER HOODIE White', productImageUrl: 'https://cdn-images.farfetch-contents.com/16/04/72/60/16047260_31055558_480.jpg', price: 420, quantity: 1},
+    {productName: 'BLACK MONALISA OVER HOODIE White', productImageUrl: 'https://cdn-images.farfetch-contents.com/16/04/72/60/16047260_31055558_480.jpg', price: 400, quantity: 1}, {productName: 'BLACK MONALISA OVER HOODIE White', productImageUrl: 'https://cdn-images.farfetch-contents.com/16/04/72/60/16047260_31055558_480.jpg', price: 340, quantity: 1}];
 
   constructor(
     private router: Router,

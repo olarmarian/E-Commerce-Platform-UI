@@ -15,6 +15,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   products: ProductModel[] = [];
   productFilters: FiltersMetadataModel;
   areFiltersLoading: boolean = true;
+  valueEmittedFromChildComponent: any;
 
   requestMetadata = {
     categories: [],
@@ -100,4 +101,9 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
+
+  addProduct(id: number) {
+      console.log(id);
+      this.valueEmittedFromChildComponent = id;
+    }
 }
