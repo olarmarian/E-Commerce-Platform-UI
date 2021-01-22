@@ -5,12 +5,13 @@ import { AuthCredentialsModel } from './models/auth-credentials.model';
 import { SignUpRequestModel } from './models/signup-request.model';
 import { AuthResponseModel } from './models/auth-response.model';
 import jwt_decode from 'jwt-decode';
+import { AUTH_URLS, BASE_URL, CORE_URLS, LABELS } from '../constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private authorizationUrl = 'http://localhost:3000/auth';
+  private authorizationUrl = BASE_URL + CORE_URLS.AUTH;
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -24,7 +25,7 @@ export class AuthService {
 
   login(credentials: AuthCredentialsModel): Observable<AuthResponseModel> {
     return this.http.post<AuthResponseModel>(
-      this.authorizationUrl + '/login',
+      this.authorizationUrl + AUTH_URLS.LOGIN,
       credentials,
       this.httpOptions
     );
@@ -32,14 +33,14 @@ export class AuthService {
 
   signup(credentials: SignUpRequestModel) {
     return this.http.post<any>(
-      this.authorizationUrl + '/signup',
+      this.authorizationUrl + AUTH_URLS.SIGNUP,
       credentials,
       this.httpOptions
     );
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('TOKEN');
+    const token = localStorage.getItem(LABELS.TOKEN);
     if (token) {
       return true;
     }
@@ -47,7 +48,7 @@ export class AuthService {
   }
 
   getUserEmail(): Observable<string> {
-    const token = localStorage.getItem('TOKEN');
+    const token = localStorage.getItem(LABELS.TOKEN);
     if (token) {
       const decodedJwt: any = jwt_decode(token);
       this.userEmail.next(decodedJwt.email);
@@ -57,6 +58,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('TOKEN');
+    localStorage.removeItem(LABELS.TOKEN);
   }
 }
