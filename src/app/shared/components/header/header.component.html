@@ -45,11 +45,11 @@
               <div>
                 <span style="color: #7E7C7C; font-size: 10px;">Qty.</span>
                 <button mat-icon-button class="qty-edit-container">
-                  <mat-icon class="qty-edit">remove</mat-icon>
+                  <mat-icon class="qty-edit" (click)="deleteQuantity(item)">remove</mat-icon>
                 </button>
                 <input class="quantity-input" value="{{item.quantity}}" readonly>
                 <button mat-icon-button class="qty-edit-container-1">
-                  <mat-icon class="qty-edit">add</mat-icon>
+                  <mat-icon class="qty-edit" (click)="addQuantity(item)">add</mat-icon>
                 </button>
               </div>
             </div>

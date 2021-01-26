@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
-import { FormControl } from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import { SubSink } from 'subsink';
 import { ProductsService } from '../../../products/products.service';
 import { ProfileService } from 'src/app/profile/services/profile.service';
@@ -114,6 +114,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (cartData[i].product._id === item.product._id) {
         cartData.splice(i, 1);
         this.cartData.value.subtotal -= (item.product.price * item.quantity);
+      }
+    }
+  }
+
+  addQuantity(item) {
+    const cartData = this.cartData.value.items;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].product._id === item.product._id) {
+      this.cartData.value.items[i].quantity++;
+      this.cartData.value.subtotal += item.product.price;
+      }
+    }
+  }
+
+  deleteQuantity(item) {
+    const cartData = this.cartData.value.items;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].product._id === item.product._id) {
+        this.cartData.value.items[i].quantity--;
+        this.cartData.value.subtotal -= item.product.price;
+      }
+      if (cartData[i].quantity === 0) {
+        cartData.splice(i, 1);
       }
     }
   }
