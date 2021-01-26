@@ -5,6 +5,9 @@
   background-color: #fff;
   color: #1a1a1a;
   text-align: center;
+  -webkit-box-shadow: 0px 1px 13px -1px #868585;
+  box-shadow: 0px 1px 13px -1px #949191;
+
 
   img {
     width: 100%;
@@ -12,6 +15,14 @@
     border-bottom: 1px solid #eeeeee;
   }
 
+.add-product-cart-btn {
+  background-color: var(--app-primary) ;
+}
+
+.product-image-container {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
 
   .ProductCard__content {
     padding: 1em 1em 0 1em;
@@ -25,11 +36,11 @@
 
     .ProductCard__content--category {
       font-size: 14px;
-      color: #bababa;
+      color: var(--text-color);
     }
 
     .ProductCard__content--price {
-      color: red;
+      color: var(--text-color);
       font-weight: 500;
       font-size: 18px;
     }

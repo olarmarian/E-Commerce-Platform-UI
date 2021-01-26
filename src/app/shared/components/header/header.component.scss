@@ -1,13 +1,15 @@
 .Header {
 
   height: 60px;
-  background-color: var(--app-accent);
-  color: var(--app-secondary);
+  background-color: var(--app-secondary);
+  color: var(--title-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 3em;
   line-height: 1px;
+  border-bottom: 2px solid #ff7050;
+
 
   h1 {
     margin: 0;
@@ -19,6 +21,9 @@
 
   .user_icon {
     cursor: pointer;
+    font-size: 28px;
+    height: 28px;
+    width: 28px;
   }
 
   .shopping-cart-icon-wrapper{
@@ -35,6 +40,9 @@
 
   .cart-dropdown {
     background: #fafafa;
+    .span {
+      color: #1a1a1a;
+    }
   }
 }
 
@@ -108,4 +116,9 @@
 
 .qty-edit {
   font-size: 14px;
+}
+
+.header-right-corner {
+  display: flex;
+  flex-direction: row;
 }

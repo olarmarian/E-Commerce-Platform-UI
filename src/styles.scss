@@ -31,8 +31,8 @@ body {
   // width: 70%;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 1em;
-  padding: 5em 0;
+  //margin-top: 1em;
+  //padding: 5em 0;
   * {
     &:focus {
       outline: none;
@@ -44,12 +44,7 @@ body {
   .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
     height: 3px;
     border-radius: 10px;
-    background-color: #eeeeee;
-  }
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
-    background-color: #c2185b;
-    width: 100%;
+    background-color: var(--app-primary);
   }
 
   .mat-accent .mat-slider-thumb {

@@ -7,9 +7,7 @@ import { ProductsService } from '../../../products/products.service';
 import { ProfileService } from 'src/app/profile/services/profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../../services/cart.service';
-import { CartModel } from '../../models/cart.model';
 import { CartItemModel } from '../../models/cart-item.model';
-import ProductModel from 'src/app/products/models/product.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {LABELS} from '../../../constants';
 

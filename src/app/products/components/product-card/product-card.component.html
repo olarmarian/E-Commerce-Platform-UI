@@ -1,5 +1,5 @@
 <mat-card class="ProductCard">
-  <img src={{product.image}} alt="product image" />
+  <img src={{product.image}} alt="product image" class="product-image-container" />
   <mat-card-content class="ProductCard__content">
     <h2 class="ProductCard__content--title">{{product.name}}</h2>
     <p class="ProductCard__content--category">{{product.category}}</p>
@@ -9,6 +9,6 @@
     <p class="ProductCard__content--price">{{product.price | currency}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="addProductToCart(product);" >Add to cart</button>
+    <button mat-raised-button (click)="addProductToCart(product);" class="add-product-cart-btn">Add to cart</button>
   </mat-card-actions>
 </mat-card>

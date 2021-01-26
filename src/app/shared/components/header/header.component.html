@@ -19,6 +19,7 @@
     <button mat-flat-button color="secondary" (click)="onSignUpClick()">Sign Up</button>
   </div>
 
+  <div class="header-right-corner">
   <div class="Header__div--action" *ngIf="isAuthenticated()">
     <mat-icon class="user_icon" [matMenuTriggerFor]="userMenu">account_circle</mat-icon>
     <mat-menu #userMenu="matMenu">
@@ -33,7 +34,7 @@
       <img src="../../../../assets/images/shopping-cart.svg" class="shopping-cart-icon">
       <p>My cart</p>
     </div>
-    <mat-menu #cartMenu="matMenu" class="cart-dropdown" style="background: #bababa">
+    <mat-menu #cartMenu="matMenu" class="cart-dropdown" style="background: #bababa;">
       <div *ngIf="cartData.value.items.length > 0">
       <div class="picked-items-cart">
         <div *ngFor="let item of (cartData | async).items">
@@ -68,8 +69,9 @@
       <button mat-raised-button class="checkout-btn">Orders History</button>
       </div>
       <div *ngIf="cartData.value.items.length === 0">
-        <p style="padding: 10px">Your cart is empty :( </p>
+        <span style="padding: 10px">Your cart is empty :( </span>
       </div>
     </mat-menu>
+  </div>
   </div>
 </header>

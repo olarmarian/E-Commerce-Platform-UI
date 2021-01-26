@@ -1,7 +1,7 @@
 .Slider__div--price {
     // width: 19rem;
     padding: 5px 1em;
-    border: 1px solid #eeeeee;
+    border: 1px solid var(--app-primary);
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -13,8 +13,20 @@
 
     .Slider__span--price {
         width: fit-content;
-        color: #c2185b;
+        color: var(--app-primary);
         font-size: 14px;
         font-weight: 600;
     }
+}
+
+::ng-deep.mat-slider-ticks {
+  color: var(--app-primary);
+}
+
+::ng-deep .mat-accent .mat-slider-track-fill {
+  background: var(--app-primary) !important;
+}
+
+::ng-deep .scrollbar-thumb {
+  background: var(--app-primary) !important;
 }

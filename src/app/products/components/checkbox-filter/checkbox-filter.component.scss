@@ -1,13 +1,25 @@
 .Checkbox__container {
   display: flex;
   flex-direction: column;
-  border: 1px solid #eeeeee;
+  border: var(--app-primary);
   border-radius: 5px;
   // width: 20rem;
   padding: 1em .5em;
 
-  background-color: #c2185b;
-  color: #fff;
+  background-color:  var(--app-secondary);
+  color: var(--title-color);
   font-weight: 400;
   font-size: 15px;
+}
+
+::ng-deep.mat-checkbox-frame {
+  border-color: var(--app-primary);
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: var(--app-primary);
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: white !important;
 }

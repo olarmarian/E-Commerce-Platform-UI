@@ -30,7 +30,7 @@
 
   .title {
     font-weight: bold;
-    color: var(--app-accent);
+    color: var(--text-color);
   }
 
   label {
@@ -66,7 +66,7 @@
           box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.10);
           border-radius: 5px;
           padding: 15px 10px;
-          border-color: var(--app-accent);
+          border-color: var(--app-primary);
           font-size: 16px;
           margin-bottom: 5px;
         }
@@ -81,7 +81,7 @@
         width: 100%;
         border-radius: 5px;
         padding: 5px 0;
-        background-color: var(--app-accent);
+        background-color: var(--app-primary);
       }
 
       .div--info {
