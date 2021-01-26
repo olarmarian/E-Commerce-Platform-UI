@@ -34,6 +34,7 @@
       <p>My cart</p>
     </div>
     <mat-menu #cartMenu="matMenu" class="cart-dropdown" style="background: #bababa">
+      <div *ngIf="cartData.value.items.length > 0">
       <div class="picked-items-cart">
         <div *ngFor="let item of (cartData | async).items">
           <div class="cart-item">
@@ -65,6 +66,10 @@
         <span style="font-size: 14px;">{{(cartData | async).subtotal | currency}}</span>
       </div>
       <button mat-raised-button class="checkout-btn">Orders History</button>
+      </div>
+      <div *ngIf="cartData.value.items.length === 0">
+        <p style="padding: 10px">Your cart is empty :( </p>
+      </div>
     </mat-menu>
   </div>
 </header>

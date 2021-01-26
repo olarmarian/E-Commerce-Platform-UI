@@ -116,6 +116,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.cartData.value.subtotal -= (item.product.price * item.quantity);
       }
     }
+    localStorage.setItem(LABELS.CART, JSON.stringify(cartData));
   }
 
   addQuantity(item) {
@@ -126,6 +127,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.cartData.value.subtotal += item.product.price;
       }
     }
+    localStorage.setItem(LABELS.CART, JSON.stringify(cartData));
   }
 
   deleteQuantity(item) {
@@ -139,5 +141,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         cartData.splice(i, 1);
       }
     }
+    localStorage.setItem(LABELS.CART, JSON.stringify(cartData));
   }
 }
