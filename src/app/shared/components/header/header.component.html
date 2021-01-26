@@ -27,4 +27,49 @@
       <button mat-menu-item (click)="onLogOutClick()">Log out</button>
     </mat-menu>
   </div>
+
+  <div class="Header__div--action">
+    <div class="shopping-cart-icon-wrapper" [matMenuTriggerFor]="cartMenu">
+      <img src="../../../../assets/images/shopping-cart.svg" class="shopping-cart-icon">
+      <p>My cart</p>
+    </div>
+    <mat-menu #cartMenu="matMenu" class="cart-dropdown" style="background: #bababa">
+      <div *ngIf="cartData.value.items.length > 0">
+      <div class="picked-items-cart">
+        <div *ngFor="let item of (cartData | async).items">
+          <div class="cart-item">
+            <div class="product-image-wrapper"><img src={{item.product.image}} alt="product image"
+                style="width: 100px; height: 120px; border-radius: 10px" /></div>
+            <div style="margin-top: 10px">
+              <span>${{item.product.price}}</span><br>
+              <span style="color: #7E7C7C; font-size: 12px;">{{item.product.name}}</span><br>
+              <div>
+                <span style="color: #7E7C7C; font-size: 10px;">Qty.</span>
+                <button mat-icon-button class="qty-edit-container">
+                  <mat-icon class="qty-edit" (click)="deleteQuantity(item)">remove</mat-icon>
+                </button>
+                <input class="quantity-input" value="{{item.quantity}}" readonly>
+                <button mat-icon-button class="qty-edit-container-1">
+                  <mat-icon class="qty-edit" (click)="addQuantity(item)">add</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="delete-item-icon"><img src='../../../../assets/images/delete.svg' alt="product image"
+                style="width: 20px; height: 20px;" (click)="deleteProduct(item);"/></div>
+          </div>
+          <mat-divider style="background: #C4C4C4"></mat-divider>
+        </div>
+      </div>
+      <mat-divider style="background: #C4C4C4"></mat-divider>
+      <div class="subtotal-container">
+        <span style="font-size: 14px;">Sub-total</span>
+        <span style="font-size: 14px;">{{(cartData | async).subtotal | currency}}</span>
+      </div>
+      <button mat-raised-button class="checkout-btn">Orders History</button>
+      </div>
+      <div *ngIf="cartData.value.items.length === 0">
+        <p style="padding: 10px">Your cart is empty :( </p>
+      </div>
+    </mat-menu>
+  </div>
 </header>

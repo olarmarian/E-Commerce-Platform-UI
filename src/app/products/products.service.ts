@@ -49,4 +49,8 @@ export class ProductsService {
   getProductsByName(name: string): Observable<any> {
     return this.http.get<any>(`${this.productsUrl}?name=` + name, this.httpOptions);
   }
+
+  getProductsById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.productsUrl}/${id}`, this.httpOptions);
+  }
 }

@@ -1,11 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/security/auth.service';
-import { FormControl } from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import { SubSink } from 'subsink';
 import { ProductsService } from '../../../products/products.service';
 import { ProfileService } from 'src/app/profile/services/profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartService } from '../../services/cart.service';
+import { CartModel } from '../../models/cart.model';
+import { CartItemModel } from '../../models/cart-item.model';
+import ProductModel from 'src/app/products/models/product.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import {LABELS} from '../../../constants';
 
 @Component({
   selector: 'app-header',
@@ -19,14 +25,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   email: string;
   name: string;
+  cartData = new BehaviorSubject<any>({
+    items: [],
+    subtotal: 0,
+  });
 
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private productsService: ProductsService,
-    private profileService: ProfileService
-  ) {}
+    private profileService: ProfileService,
+    private cartService: CartService
+  ) {
+  }
 
   ngOnInit(): void {
     this.email = null;
@@ -40,9 +52,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.name = response.name;
       },
       (error) => {
-        this.snackBar.open(error.message, '', { duration: 3000 });
+        this.snackBar.open(error.message, '', {duration: 3000});
       }
     );
+
+    this.subs.sink = this.cartService.getCart().subscribe((data) => {
+      const newCartData = {
+        items: [],
+        subtotal: 0,
+      };
+      // console.log(data, 'data');
+
+      data.items.forEach((item: CartItemModel) => {
+        newCartData.items.push({
+          product: item.product,
+          quantity: item.quantity,
+        });
+
+        newCartData.subtotal =
+          newCartData.subtotal + item.product.price * item.quantity;
+      });
+      // console.log(newCartData, 'new cart data');
+      this.cartData.next(newCartData);
+      console.log(this.cartData.value.items.length);
+    });
   }
 
   isAuthenticated(): boolean {
@@ -73,5 +106,41 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  deleteProduct(item) {
+    const cartData = this.cartData.value.items;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].product._id === item.product._id) {
+        cartData.splice(i, 1);
+        this.cartData.value.subtotal -= (item.product.price * item.quantity);
+      }
+    }
+    localStorage.setItem(LABELS.CART, JSON.stringify(cartData));
+  }
+
+  addQuantity(item) {
+    const cartData = this.cartData.value.items;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].product._id === item.product._id) {
+      this.cartData.value.items[i].quantity++;
+      this.cartData.value.subtotal += item.product.price;
+      }
+    }
+    localStorage.setItem(LABELS.CART, JSON.stringify(cartData));
+  }
+
+  deleteQuantity(item) {
+    const cartData = this.cartData.value.items;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].product._id === item.product._id) {
+        this.cartData.value.items[i].quantity--;
+        this.cartData.value.subtotal -= item.product.price;
+      }
+      if (cartData[i].quantity === 0) {
+        cartData.splice(i, 1);
+      }
+    }
+    localStorage.setItem(LABELS.CART, JSON.stringify(cartData));
   }
 }
