@@ -11,11 +11,10 @@ export class ProductCardComponent implements OnInit {
   @Input('product') product?: ProductModel;
   addedProductsToCart = [];
   constructor(private cartService: CartService) {}
-
+  productReview = [0, 1, 2, 3, 4];
   ngOnInit(): void {}
 
   addProductToCart(product) {
-    console.log(product, "Add to cart")
     this.cartService.addToCart(product);
   }
 }

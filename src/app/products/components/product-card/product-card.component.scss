@@ -16,12 +16,28 @@
   }
 
 .add-product-cart-btn {
-  background-color: var(--app-primary) ;
+  background-color: var(--app-primary);
 }
 
 .product-image-container {
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
+}
+
+.raiting-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  line-height: 18px;
+    p {
+      margin-right: 10px;
+    }
+}
+.star-icon {
+  color: var(--app-primary);
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
 }
 
   .ProductCard__content {

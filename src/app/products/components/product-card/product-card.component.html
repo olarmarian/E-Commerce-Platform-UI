@@ -2,6 +2,11 @@
   <img src={{product.image}} alt="product image" class="product-image-container" />
   <mat-card-content class="ProductCard__content">
     <h2 class="ProductCard__content--title">{{product.name}}</h2>
+    <div class="raiting-container">
+      <p>Review</p>
+      <mat-icon *ngFor="let product of productReview" class="star-icon">star</mat-icon>
+      <p>(123)</p>
+    </div>
     <p class="ProductCard__content--category">{{product.category}}</p>
 
     <p *ngIf="product.quantity !== 0" class="ProductCard__content--in-stock">In stock</p>

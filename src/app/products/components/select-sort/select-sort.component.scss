@@ -3,16 +3,15 @@
   flex-direction: column;
   // width: 20rem;
   padding: 1em .5em;
-  background-color: var(--app-secondary);
-  color: var(--text-color);
+  //background-color: var(--app-secondary);
+  //color: var(--text-color);
   font-weight: 400;
   font-size: 15px;
 }
 
 .mat-label-color {
-  color: white;
+  color: black;
 }
-
 
 .mat-option-color {
   background: var(--app-primary);
@@ -20,3 +19,18 @@
 
 }
 
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+  border: 1px solid var(--app-primary);
+}
+
+::ng-deep.mat-select-arrow  {
+  color: #ff7050;
+}
+
+::ng-deep.mat-select-arrow  {
+  color: #ff7050;
+}
+
+.mat-select::selection.mat-select-arrow {
+  color: #63961C;
+}

@@ -15,6 +15,7 @@ import { CheckboxFilterComponent } from './components/checkbox-filter/checkbox-f
 import { PriceFilterComponent } from './components/price-filter/price-filter.component';
 import { SelectSortComponent } from './components/select-sort/select-sort.component';
 import { PaginationActionsComponent } from './components/pagination-actions/pagination-actions.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { PaginationActionsComponent } from './components/pagination-actions/pagi
     FormsModule,
     MatSliderModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule
   ],
   declarations: [
     ProductsPageComponent,
