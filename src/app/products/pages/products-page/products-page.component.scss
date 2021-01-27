@@ -2,17 +2,16 @@
   width: 25%;
   background-color: var(--app-secondary);
   padding-top: 1%;
-
 }
 
 
 .ProductsGridLayoutContainer {
 
-  width: 70%;
+  width: 80%;
 
   .ProductsGridLayout {
 
-    margin-top: 2%;
+    margin: 5%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1em;

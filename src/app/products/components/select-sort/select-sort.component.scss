@@ -16,7 +16,20 @@
 .mat-option-color {
   background: var(--app-primary);
   color: white;
+}
 
+.mat-option-color:hover {
+  background: #EE7055;
+  color: white;
+
+}
+
+::ng-deep.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: white;
+}
+
+::ng-deep.mat-select-value {
+  color: var(--title-color);
 }
 
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
@@ -27,10 +40,4 @@
   color: #ff7050;
 }
 
-::ng-deep.mat-select-arrow  {
-  color: #ff7050;
-}
 
-.mat-select::selection.mat-select-arrow {
-  color: #63961C;
-}
