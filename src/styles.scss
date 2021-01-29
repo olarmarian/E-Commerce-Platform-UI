@@ -7,6 +7,7 @@
   --app-secondary: #fafafa;
   --app-accent: #59ce8f;
   --app-background: #eeeeee;
+  --app-error: #FF0000;
   --text-color: #808080;
   --title-color: #1a1a1a;
 }
@@ -17,6 +18,7 @@ body {
   font-family: 'Montseratt';
   font-weight: 500;
   font-size: 22px;
+
 }
 
 body {
@@ -25,6 +27,7 @@ body {
 
 .Page {
   overflow: hidden;
+  display: flex;
 }
 
 .Page__content {

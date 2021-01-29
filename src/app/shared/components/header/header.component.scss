@@ -126,3 +126,8 @@
 ::ng-deep.mat-form-field-appearance-outline.mat-form-field-outline {
   border: 1px solid black !important;
 }
+
+.login-btn {
+  background-color: var(--app-primary);
+  color: white;
+}

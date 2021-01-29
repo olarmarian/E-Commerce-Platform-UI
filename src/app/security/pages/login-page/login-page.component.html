@@ -7,14 +7,14 @@
           <div class="d-flex flex-column input-container">
             <label for="email">Email</label>
             <input id="email" class="input-field" type="text" formControlName="email" placeholder="Enter your email"
-              [ngStyle]="{'border-color': submitted && loginForm.get('email').invalid ?  'var(--app-primary)' : 'var(--app-accent)'}">
+              [ngStyle]="{'border-color': submitted && loginForm.get('email').invalid ?  'var(red)' : 'var(--app-primary)'}">
             <p *ngIf="submitted && loginForm.get('email').invalid" class="p--error">Invalid email!</p>
           </div>
 
           <div class="d-flex flex-column input-container">
             <label for="password">Password</label>
             <input id="password" class="input-field" type="password" formControlName="password" placeholder="Password"
-              [ngStyle]="{'border-color': submitted && loginForm.get('password').invalid ? 'var(--app-primary)' : 'var(--app-accent)'}">
+              [ngStyle]="{'border-color': submitted && loginForm.get('password').invalid ? 'var(--app-error)' : 'var(--app-primary)'}">
             <p *ngIf="submitted && loginForm.get('password').invalid" class="p--error">Invalid password!</p>
           </div>
           <button class="btn--login" mat-raised-button color="primary" type="button" (click)="performLogin()">Log
